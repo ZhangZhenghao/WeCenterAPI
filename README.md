@@ -1,17 +1,17 @@
-WeCenterMobile-Api
+WeCenterAPI
 ==================
 
-WeCenter(3.1.7) 移动客户端 Api (2016-01-12)
+WeCenter 3.1.9 移动客户端API
 
-####Api安装说明
+# Usage
 
-> 1.Api文件共两个目录，为：
+1.Api文件共两个目录，为：
 
 - app/api/
 
 - models/
 
-> 2.AppSecret后台管理共四个文件，为：
+2.AppSecret后台管理共四个文件，为：
 
 - app/admin/mobile_app_config.php
 
@@ -23,9 +23,7 @@ WeCenter(3.1.7) 移动客户端 Api (2016-01-12)
 
 下载后直接安装部署即可用。
 
-PS:对接口有疑问或修改建议，请联系@Hwei
-
-==================
+# License
 
 Copyright 2016 [emtx.com](http://emtx.com/)&[iflab.org](http://iflab.org/)
 
