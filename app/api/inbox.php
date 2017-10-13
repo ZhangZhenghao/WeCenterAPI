@@ -84,6 +84,7 @@ class inbox extends AWS_CONTROLLER
 				$data[$key]['last_message'] = $last_message[$value['id']];
 				$data[$key]['update_time'] = $value['update_time'];
 				$data[$key]['id'] = $value['id'];
+				$data[$key]['avatar_file'] = get_avatar_url($data[$key]['uid'],'max');
 			}
 		}
 
@@ -109,6 +110,8 @@ class inbox extends AWS_CONTROLLER
 
 		$this->model('message')->set_message_read($_GET['id'], $this->user_id);
 
+		$data = array();
+
 		if ($list = $this->model('message')->get_message_by_dialog_id($_GET['id']))
 		{
 			if ($dialog['sender_uid'] != $this->user_id)
@@ -132,10 +135,15 @@ class inbox extends AWS_CONTROLLER
 				}
 				else
 				{
-					$list[$key]['message'] = FORMAT::parse_links($val['message']);
+					$val['message'] = FORMAT::parse_links($val['message']);
 
-					$list[$key]['user_name'] = $recipient_user['user_name'];
-					$list[$key]['url_token'] = $recipient_user['url_token'];
+					$val['user_name'] = $recipient_user['user_name'];
+					$val['url_token'] = $recipient_user['url_token'];
+				
+					$val['local'] = $val['uid'] == $this->user_id;
+					$val['avatar_file'] = get_avatar_url($val['uid'],'max');
+
+					array_push($data, $val);
 				}
 			}
 		}
@@ -153,10 +161,9 @@ class inbox extends AWS_CONTROLLER
 		$recipient_user['avatar_file'] = get_avatar_url($recipient_user['uid'],'max');
 
 		H::ajax_json_output(AWS_APP::RSM(array(
-            'recipient_user' => $recipient_user,
-            'rows' => $list
-        ), 1, null));
-
+        	    	'total_rows' => count($data),
+            		'rows' => $data
+        	), 1, null));
 	}
 
 
