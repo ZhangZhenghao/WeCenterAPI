@@ -245,4 +245,16 @@ class topic extends AWS_CONTROLLER
 				), 1, null));
 	}
 
+	public function posts_action() 
+	{
+		$data = $this->model('posts')->get_posts_list(null, 1, 10, 'new', array($_GET['id']));
+		foreach ($data as $key => $val) {
+			$data[$key]['user_info']['avatar_file'] = get_avatar_url($val['user_info']['uid'],'max');
+		}
+                H::ajax_json_output(AWS_APP::RSM(array(
+		                       'total_rows' => count($data),
+		                        'rows' => array_values($data)
+		                ), 1, null));
+	}
+	
 }
