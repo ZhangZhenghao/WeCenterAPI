@@ -106,7 +106,8 @@ class account extends AWS_CONTROLLER
 				H::ajax_json_output(AWS_APP::RSM(array(
 					'uid' => $user_info['uid'],
 					'user_name' => $user_info['user_name'],
-					'avatar_file' => $user_info['avatar_file'],
+                    'avatar_file' => $user_info['avatar_file'],
+                    'email' => $user_info['email'],
 					'valid_email' => $valid_email,
 					'is_first_login' => $is_first_login
 				), 1, null));
@@ -248,7 +249,8 @@ class account extends AWS_CONTROLLER
 
 		H::ajax_json_output(AWS_APP::RSM(array(
 					'uid' => $user_info['uid'],
-					'user_name' => $user_info['user_name'],
+                    'user_name' => $user_info['user_name'],
+                    'email' => $user_info['email'],
 					'valid_email' => $valid_email
 				), 1, null));
 	}
